@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+  hass:
+    image: lroguet/rpi-home-assistant:latest
+    container_name: hass
+    volumes: 
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/home/debian/homeassistant/config:/config'
+      - '/sys:/sys'
+    network_mode: 'host'
+    restart: 'always'
+
+  cron:
+    build: 
+      context: ./cron
+      dockerfile: Dockerfile.debian
+#    image: 127.0.0.1:5000/hasscron
+    image: hasscron:debian-latest
+    restart: 'always'
+    ports:
+      - "8888:8888"
