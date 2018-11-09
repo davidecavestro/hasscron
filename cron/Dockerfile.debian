@@ -1,6 +1,6 @@
 FROM arm32v7/python:2.7-slim-stretch
 
-COPY qemu-arm-static /usr/bin
+#COPY qemu-arm-static /usr/bin
 
 RUN mkdir -p /app/bin /app/src
 
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get upgrade -y --no-install-recommends && \
     apt-get install -y --no-install-recommends git net-tools dnsutils apt-utils&& \
     pip install --upgrade pip setuptools 
 
-RUN pip install -e git+https://github.com/Nextdoor/ndscheduler.git#egg=ndscheduler
+RUN pip install -e git+https://github.com/davidecavestro/ndscheduler.git@no_apns#egg=ndscheduler
 
 RUN apt-get purge -y git apt-utils && \
     apt-get autoremove -y && apt-get autoclean -y
